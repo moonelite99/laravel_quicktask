@@ -1,8 +1,14 @@
 /node_modules
+/public/css
+/public/js
 /public/hot
+/public/fonts
+/public/font-awesome
 /public/storage
+/public/mix-manifest.json
 /storage/*.key
 /vendor
+/bower_components
 .env
 .env.backup
 .phpunit.result.cache
@@ -10,3 +16,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+bower.json
+package-lock.json
+composer.lock
