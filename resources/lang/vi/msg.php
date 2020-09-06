@@ -15,4 +15,7 @@ return [
     'update_successful' => 'Tác vụ đã được cập nhật!',
     'delete_successful' => 'Tác vụ đã được xóa!',
     'find_fail' => 'Không tìm thấy tác vụ!',
+    'language' => 'Ngôn ngữ',
+    'english' => 'Tiếng Anh',
+    'vietnamese' => 'Tiếng Việt',
 ];

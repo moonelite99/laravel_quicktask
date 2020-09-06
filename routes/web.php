@@ -13,4 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('tasks', 'TaskController');
+
+Route::group(['middleware' => 'localization'], function() {
+
+    Route::post('/lang', 'LangController@postLang')->name('switch_lang');
+
+    Route::resource('tasks', 'TaskController');
+});
