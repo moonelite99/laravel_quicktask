@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskFormRequest;
+use App\Http\Requests\CommentFormRequest;
 use App\Models\Comment;
-use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class TaskController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
-
-        return view('tasks.index', compact('tasks'));
+        //
     }
 
     /**
@@ -38,11 +35,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskFormRequest $request)
+    public function store(CommentFormRequest $request)
     {
-        Task::create($request->all());
+        Comment::create($request->all());
 
-        return redirect()->route('tasks.index')->with('status', trans('msg.create_successful'));
+        return redirect()->route('tasks.show', $request->task_id);
     }
 
     /**
@@ -53,14 +50,7 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        try {
-            $task = Task::findOrFail($id);
-            $comments = $task->comments;
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('tasks.index')->with('fail_status', trans('msg.find_fail'));
-        }
-
-        return view('tasks.show', compact('task', 'comments'));
+        //
     }
 
     /**
@@ -71,13 +61,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        try {
-            $task = Task::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('tasks.index')->with('fail_status', trans('msg.find_fail'));
-        }
-
-        return view('tasks.edit', compact('task'));
+        //
     }
 
     /**
@@ -87,16 +71,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskFormRequest $request, $id)
+    public function update(CommentFormRequest $request, $id)
     {
         try {
-            $task = Task::findOrFail($id);
-            $task->update($request->all());
+            $comment = Comment::findOrFail($id);
+            $comment->update($request->all());
         } catch (ModelNotFoundException $e) {
             return redirect()->route('tasks.index')->with('fail_status', trans('msg.find_fail'));
         }
 
-        return redirect()->route('tasks.edit', $task->id)->with('status', trans('msg.update_successful'));
+        return redirect()->route('tasks.show', $request->task_id)->with('status', trans('msg.update_successful'));
     }
 
     /**
@@ -105,15 +89,15 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         try {
-            $task = Task::findOrFail($id);
-            $task->delete();
+            $comment = Comment::findOrFail($id);
+            $comment->delete();
         } catch (ModelNotFoundException $e) {
             return redirect()->route('tasks.index')->with('fail_status', trans('msg.find_fail'));
         }
 
-        return redirect()->route('tasks.index')->with('msg', trans('msg.delete_successful'));
+        return redirect()->route('tasks.show', $request->task_id)->with('msg', trans('msg.delete_successful'));
     }
 }

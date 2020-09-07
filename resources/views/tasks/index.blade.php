@@ -81,6 +81,12 @@
                                                     </div>
                                                 </form>
                                             </td>
+                                            <td>
+                                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-info pull-right">
+                                                    <i class="fa fa-comment" aria-hidden="true"></i>
+                                                    {{ trans('msg.comment') }}
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

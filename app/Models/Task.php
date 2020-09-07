@@ -9,4 +9,9 @@ class Task extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'task_id');
+    }
 }
