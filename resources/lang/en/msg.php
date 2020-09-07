@@ -15,4 +15,7 @@ return [
     'update_successful' => 'The task has been updated!',
     'delete_successful' => 'The task has been deleted!',
     'find_fail' => 'Task not found!',
+    'language' => 'Language',
+    'english' => 'English',
+    'vietnamese' => 'Vietnamese',
 ];

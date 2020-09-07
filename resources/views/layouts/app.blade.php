@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="js/main.js"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -23,6 +24,31 @@
                     {{ trans('msg.task_list') }}
                 </a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{ trans('msg.language') }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" onclick="en()">
+                                {{ trans('msg.english') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="vi()">
+                                {{ trans('msg.vietnamese') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <form id="language-form" action="{{ route('switch_lang') }}" method="POST" class="d-none">
+                @csrf
+                <input type="hidden" id="locale" name="locale">
+            </form>
         </div>
     </nav>
     @yield('content')
